@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+%fontFS {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+}
+@mixin fontSWH($size, $weight, $height, $color){
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $height;
+    color: $color;
+}
+
+.title1 {
+    @extend %fontFS;
+    @include fontSWH(26px, 700, 34px, var(--grey-600));
+}
+.title2 {
+    @extend %fontFS;
+    @include fontSWH(22px, 700, 24px, var(--grey-600));
+}
+.title3 {
+    @extend %fontFS;
+    @include fontSWH(18px, 700, 24px, var(--grey-600));
+}
+.headline {
+    @extend %fontFS;
+    @include fontSWH(16px, 400, 24px, var(--grey-300));
+}
+.body {
+    @extend %fontFS;
+    @include fontSWH(14px, 400, 24px, var(--grey-300));
+}
+.body-600 {
+    @extend %fontFS;
+    @include fontSWH(14px, 600, 24px, var(--grey-300));
+}
+.caption {
+    @extend %fontFS;
+    @include fontSWH(12px, 400, 16px, var(--grey-300));
+}

@@ -1,26 +1,50 @@
-import { useState } from "react";
-import { CartModal } from "../../components/CartModal";
-import { Header } from "../../components/Header";
-import { ProductList } from "../../components/ProductList";
+import { useEffect, useState } from "react"
+import { Header } from "../../components/Header"
+import { ProductList } from "../../components/ProductList"
+import { CartModal } from "../../components/CartModal"
+import { api } from "../../data/axios"
+import "../../styles/index.scss"
 
 export const HomePage = () => {
-   const [productList, setProductList] = useState([]);
-   const [cartList, setCartList] = useState([]);
+   const [productList, setProductList] = useState([])
+   const [cartList, setCartList] = useState([])
+   const [isOpen, setIsOpen] = useState(false)
 
-   // useEffect montagem - carrega os produtos da API e joga em productList
-   // useEffect atualização - salva os produtos no localStorage (carregar no estado)
-   // adição, exclusão, e exclusão geral do carrinho
-   // renderizações condições e o estado para exibir ou não o carrinho
-   // filtro de busca
-   // estilizar tudo com sass de forma responsiva
+   useEffect(() => {
+      const getProducts = async () => {
+         try {
+            const { data } = await api.get("/products")
+            setProductList(data)
+         } catch (error) {
+            throw new Error(error)
+         }
+      }
+      getProducts()
+   }, [])
+
+   // useEffect(() => {
+   //    const saveProducts = () => {
+   //       localStorage.setItem(`@${product.name}`)
+   //    }
+   //    saveProducts()
+   // }, [cartList])
+
+   // const addProduct = (newProduct) => {
+   //    setCartList([...cartList, newProduct])
+   // }
+
+   //   const removeCard = (removeId) => {
+   //       const newList = cartList.filter(item => item.id !== removeId)
+   //       setCartList(newList)
+   //   }
 
    return (
       <>
-         <Header />
+         <Header setIsOpen={setIsOpen}/>
          <main>
             <ProductList productList={productList} />
-            <CartModal cartList={cartList} />
+            {isOpen ? <CartModal cartList={cartList} setCartList={setCartList} setIsOpen={setIsOpen}/> : null}
          </main>
       </>
-   );
-};
+   )
+}

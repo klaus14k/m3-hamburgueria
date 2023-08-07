@@ -1,20 +1,22 @@
-import { useState } from "react";
-import Logo from "../../assets/Logo.svg";
-import { MdSearch, MdShoppingCart } from "react-icons/md";
+import { useState } from "react"
+import Logo from "../../assets/Logo.svg"
+import { MdSearch, MdShoppingCart } from "react-icons/md"
+import "./index.scss"
 
-export const Header = () => {
-   const [value, setValue] = useState("");
+export const Header = ({ setIsOpen }) => {
+   const [value, setValue] = useState("")
 
    return (
       <header>
          <img src={Logo} alt="Logo Kenzie Burguer" />
          <div>
-            <button>
+            <button onClick={() => setIsOpen(true)}>
                 <MdShoppingCart size={21} />
                 <span>0</span>
             </button>
             <form>
                <input
+                  className="input"
                   type="text"
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
@@ -25,5 +27,5 @@ export const Header = () => {
             </form>
          </div>
       </header>
-   );
-};
+   )
+}

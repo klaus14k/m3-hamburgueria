@@ -1,11 +1,12 @@
-import { ProductCard } from "./ProductCard";
+import { ProductCard } from "./ProductCard"
+import "./index.scss"
 
 export const ProductList = ({ productList }) => {
    return (
-      <ul>
+      <ul className="ul">
          {productList.map((product) => (
             <ProductCard key={product.id} product={product} />
          ))}
       </ul>
-   );
-};
+   )
+}

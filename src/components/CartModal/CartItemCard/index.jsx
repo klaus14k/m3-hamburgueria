@@ -1,4 +1,4 @@
-import { MdDelete } from "react-icons/md";
+import { MdDelete } from "react-icons/md"
 
 export const CartItemCard = ({ product }) => {
    return (
@@ -11,5 +11,5 @@ export const CartItemCard = ({ product }) => {
             <MdDelete size={21} />
          </button>
       </li>
-   );
-};
+   )
+}

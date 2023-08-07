@@ -1,0 +1,48 @@
+.ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3.6044rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid var(--grey-100, #E0E0E0);
+    border-radius: 5px;
+    background: #FFF;
+
+    img {
+        width: 240px;
+        height: 150px;
+        background-color: var(--grey-100);
+    }
+    div {
+        padding: 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+
+        .body {
+            color: #27AE60;
+            font-family: "Inter", sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 24px;
+        }
+        
+        button {
+            width: fit-content;
+        }
+    }
+}
+
+@media screen and (max-width: 762px){
+    .ul {
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        gap: 1.25rem;
+    }
+}
