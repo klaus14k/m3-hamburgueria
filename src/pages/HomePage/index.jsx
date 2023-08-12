@@ -3,11 +3,15 @@ import { Header } from "../../components/Header"
 import { ProductList } from "../../components/ProductList"
 import { CartModal } from "../../components/CartModal"
 import { api } from "../../data/axios"
+import { toast } from "react-toastify"
 import "../../styles/index.scss"
 
 export const HomePage = () => {
+   const localCartList = localStorage.getItem("@CartList")
+
+   const [search, setSearch] = useState("")
    const [productList, setProductList] = useState([])
-   const [cartList, setCartList] = useState([])
+   const [cartList, setCartList] = useState(localCartList ? JSON.parse(localCartList) : [])
    const [isOpen, setIsOpen] = useState(false)
 
    useEffect(() => {
@@ -22,28 +26,31 @@ export const HomePage = () => {
       getProducts()
    }, [])
 
-   // useEffect(() => {
-   //    const saveProducts = () => {
-   //       localStorage.setItem(`@${product.name}`)
-   //    }
-   //    saveProducts()
-   // }, [cartList])
+   useEffect(() => {
+      localStorage.setItem("@CartList", JSON.stringify(cartList))
+   }, [cartList])
 
-   // const addProduct = (newProduct) => {
-   //    setCartList([...cartList, newProduct])
-   // }
+   const addProduct = (newProduct) => {
+      if (cartList.includes(newProduct)){
+         toast.error("Esse item já foi adicionado ao carrinho")
+      }
+      else {
+         setCartList([...cartList, newProduct])
+         toast.success("Item adicionado ao carrinho")
+      }
+   }
 
-   //   const removeCard = (removeId) => {
-   //       const newList = cartList.filter(item => item.id !== removeId)
-   //       setCartList(newList)
-   //   }
+   const removeProduct = (removeId) => {
+      const newList = cartList.filter(item => item.id !== removeId)
+      setCartList(newList)
+   }
 
    return (
       <>
-         <Header setIsOpen={setIsOpen}/>
+         <Header cartList={cartList} setIsOpen={setIsOpen} setSearch={setSearch} />
          <main>
-            <ProductList productList={productList} />
-            {isOpen ? <CartModal cartList={cartList} setCartList={setCartList} setIsOpen={setIsOpen}/> : null}
+            <ProductList productList={productList} addProduct={addProduct} search={search} />
+            {isOpen ? <CartModal cartList={cartList} setCartList={setCartList} removeProduct={removeProduct} setIsOpen={setIsOpen}/> : null}
          </main>
       </>
    )

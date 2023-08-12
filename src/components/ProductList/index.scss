@@ -12,13 +12,22 @@
     border: 2px solid var(--grey-100, #E0E0E0);
     border-radius: 5px;
     background: #FFF;
+    height: 340px;
 
-    img {
-        width: 240px;
-        height: 150px;
+    #img{
         background-color: var(--grey-100);
+        width: 240px;
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 162px;
+            height: 162px;
+            background-color: var(--grey-100);
+        }
     }
-    div {
+
+    #info {
         padding: 1.25rem;
         display: flex;
         flex-direction: column;
@@ -44,5 +53,7 @@
         flex-wrap: nowrap;
         overflow-x: scroll;
         gap: 1.25rem;
+
+
     }
 }

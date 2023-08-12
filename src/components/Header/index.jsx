@@ -1,10 +1,17 @@
-import { useState } from "react"
 import Logo from "../../assets/Logo.svg"
 import { MdSearch, MdShoppingCart } from "react-icons/md"
 import "./index.scss"
+import { useState } from "react"
 
-export const Header = ({ setIsOpen }) => {
+export const Header = ({ setIsOpen, cartList, setSearch }) => {
+
    const [value, setValue] = useState("")
+
+   const submit = (event) => {
+      event.preventDefault()
+      setSearch(value)
+      setValue("")
+   }
 
    return (
       <header>
@@ -12,9 +19,9 @@ export const Header = ({ setIsOpen }) => {
          <div>
             <button onClick={() => setIsOpen(true)}>
                 <MdShoppingCart size={21} />
-                <span>0</span>
+                <span>{cartList.length}</span>
             </button>
-            <form>
+            <form onSubmit={submit}>
                <input
                   className="input"
                   type="text"

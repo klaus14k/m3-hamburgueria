@@ -1,11 +1,14 @@
 import { ProductCard } from "./ProductCard"
 import "./index.scss"
 
-export const ProductList = ({ productList }) => {
+export const ProductList = ({ productList, addProduct, search }) => {
+   
+   const filteredList = productList.filter((product) => product.name.toLowerCase().includes(search.toLowerCase()) || product.category.toLowerCase().includes(search.toLowerCase()) )
+
    return (
       <ul className="ul">
-         {productList.map((product) => (
-            <ProductCard key={product.id} product={product} />
+         {filteredList.map((product) => (
+            <ProductCard key={product.id} product={product} addProduct={addProduct} />
          ))}
       </ul>
    )
